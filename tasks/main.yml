@@ -9,24 +9,27 @@
     - nginx systemd
 
 - name: Replace nginx.conf
-  copy:
+  template:
     src=/opt/test/nginx.conf/nginx.conf
     dest=/etc/nginx/nginx.conf
 
 - name: Replace index.html
-  copy:
+  template: 
     src=/opt/test/index/index.html
     dest=/var/www/public
 
 - name: Check NGINX configs
   shell: "/usr/sbin/nginx -t"
   register: nginx_config_status
+
 - name: NGINX test status
   debug:
     msg: "{{ nginx_config_status }}"
+
 - name: NGINX test status
   debug:
     msg: "{{ nginx_config_status.rc }}"
+
 - name: Service NGINX restart and enable on boot
   systemd:
     name: nginx
@@ -34,4 +37,8 @@
     enabled: yes
     daemon_reload: yes
   when: nginx_config_status.rc == 0
+
+
+
+
 
