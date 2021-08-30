@@ -1,5 +1,0 @@
----
-- name: Install EPEL Repo
-  apt:
-    name=epel-release
-    state=present
