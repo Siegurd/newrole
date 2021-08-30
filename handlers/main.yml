@@ -1,2 +1,4 @@
----
-# handlers file for newrole2
+- name: Restart nginx
+  service:
+    name=nginx
+    state=reloaded
